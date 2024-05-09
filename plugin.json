@@ -1,10 +1,13 @@
 {
-  "id": "template",
-  "name": "Plugin Template",
-  "description": "This is a template for Unifier plugins.",
+  "id": "raidguard",
+  "name": "RaidGuard",
+  "description": "Raid detection plugin for Unifier ",
   "version": "v1.0.0",
   "release": 0,
-  "minimum": 36,
+  "minimum": 43,
+  "intents": [
+    "content_protection"
+  ],
   "requirements": [],
   "shutdown": false,
   "modules": [

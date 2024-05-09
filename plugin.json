@@ -5,7 +5,7 @@
   "version": "v1.0.0",
   "release": 0,
   "minimum": 43,
-  "intents": [
+  "services": [
     "content_protection"
   ],
   "requirements": [],

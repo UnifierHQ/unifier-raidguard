@@ -248,8 +248,8 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             )
             raidbans.append(raidban)
         if not f'{message.author.id}' in list(raidban.involved.keys()):
-            raidban['involved'].update({f'{message.author.id}': []})
-        raidban[f'{message.author.id}'].append(message.id)
+            raidban.involved.update({f'{message.author.id}': []})
+        raidban.involved[f'{message.author.id}'].append(message.id)
         toban = raidban.increment()
         if punishment==2:
             response['unsafe'] = True
@@ -266,7 +266,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
                 todelete.append(raidban.involved[user])
 
             response['unsafe'] = True
-            response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{config["threshold"]})'
+            response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{config["constant"]})'
             response['target'] = toban
             response['delete'] = todelete
 

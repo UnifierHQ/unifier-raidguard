@@ -98,6 +98,14 @@ async def find_raidban(identifier):
             return raidban
     return None
 
+async def push_raidban(raidban):
+    for index in range(len(raidbans)):
+        raidban_existing = raidbans[index]
+        if raidban_existing.identifier == raidban.identifier:
+            raidbans[index] = raidban
+            return index
+    return None
+
 async def scan(message: discord.Message or revolt.Message or guilded.Message):
     """Message scan logic"""
 
@@ -240,7 +248,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             )
             raidbans.append(raidban)
         if not f'{message.author.id}' in list(raidban.involved.keys()):
-            raidban.update({f'{message.author.id}': []})
+            raidban['involved'].update({f'{message.author.id}': []})
         raidban[f'{message.author.id}'].append(message.id)
         toban = raidban.increment()
         if punishment==2:
@@ -261,6 +269,8 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{config["threshold"]})'
             response['target'] = toban
             response['delete'] = todelete
+
+        await push_raidban(raidban)
 
     return response
 

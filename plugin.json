@@ -8,12 +8,16 @@
   "services": [
     "content_protection"
   ],
-  "requirements": [],
+  "requirements": [
+    "tld",
+    "jellyfish"
+  ],
   "shutdown": false,
   "modules": [
     "raidguard_config.py"
   ],
   "utils": [
-    "raidguard_content_protection.py"
+    "raidguard_content_protection.py",
+    "rapidphish.py"
   ]
 }

@@ -31,6 +31,7 @@ from utils import rapidphish
 
 config = {
     'constant': 9600,
+    'allow_nsfw': False,
     'invites': 2,
     'rapidphish': 2,
     'raid': 1,
@@ -112,9 +113,17 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
         'delete': []
     }
 
+    if (not message.guild.explicit_content_filter == discord.ContentFilter.all_members or
+            message.channel.nsfw) and not config['allow_nsfw']:
+        response['unsafe'] = True
+        response['description'] = (
+            'Channel is NSFW or server does not have explicit content scanning set to all members.\n'+
+            'Please contact your server administrators for assistance.'
+        )
+        return response
+
     invite = False
     phishing = False
-    raid = False
 
     # Prevent message tampering
     urls = findurl(message.content)

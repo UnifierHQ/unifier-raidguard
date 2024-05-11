@@ -40,6 +40,8 @@ config = {
     ]
 }
 
+
+
 def findurl(string):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
     url = re.findall(regex,string)
@@ -118,7 +120,8 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
         'unsafe': False,
         'description': 'No suspicious content found',
         'target': {},
-        'delete': []
+        'delete': [],
+        'restrict': {}
     }
 
     if (not message.guild.explicit_content_filter == discord.ContentFilter.all_members or
@@ -269,6 +272,9 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{config["constant"]})'
             response['target'] = toban
             response['delete'] = todelete
+
+            if len(raidban.involved.keys()) >= 3:
+                response['restrict'].update({f'{message.server.id}':3600})
 
         await push_raidban(raidban)
 

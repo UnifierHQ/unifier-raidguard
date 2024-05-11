@@ -13,9 +13,7 @@
     "jellyfish"
   ],
   "shutdown": false,
-  "modules": [
-    "raidguard_config.py"
-  ],
+  "modules": [],
   "utils": [
     "raidguard_content_protection.py",
     "rapidphish.py"

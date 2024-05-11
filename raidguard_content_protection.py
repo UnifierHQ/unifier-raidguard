@@ -94,7 +94,7 @@ async def find_raidban(identifier):
     offset = 0
     for index in range(len(raidbans)):
         raidban = raidbans[index-offset]
-        if raidban.expire >= time.time():
+        if time.time() >= raidban.expire:
             raidbans.pop(index-offset)
             offset += 1
         if raidban.identifier==identifier:
@@ -281,7 +281,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             if len(raidban.involved.keys()) >= 3:
                 response['restrict'].update({f'{message.server.id}':3600})
 
-        await push_raidban(raidban)
+        print(await push_raidban(raidban))
 
     return response
 

@@ -11,8 +11,9 @@
   "requirements": [],
   "shutdown": false,
   "modules": [
-    "template.py"
+    "raidguard_config.py"
   ],
   "utils": [
+    "raidguard_content_protection.py"
   ]
 }

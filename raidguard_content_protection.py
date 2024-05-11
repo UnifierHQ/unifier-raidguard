@@ -125,7 +125,10 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
         'data': {}
     }
 
-    raidbans = data['raidbans']
+    try:
+        raidbans = data['raidbans']
+    except:
+        raidbans = []
 
     if (not message.guild.explicit_content_filter == discord.ContentFilter.all_members or
             message.channel.nsfw) and not config['allow_nsfw']:

@@ -244,7 +244,10 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
         pass
     else:
         raidban = await find_raidban(f'{message.author.id}' if punishment==2 else message.content)
+        new = False
+        toban = False
         if not raidban:
+            new = True
             raidban = RaidBan(
                 identifier=f'{message.author.id}' if punishment==2 else message.content,
                 bantype=punishment-1,
@@ -254,7 +257,8 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
         if not f'{message.author.id}' in list(raidban.involved.keys()):
             raidban.involved.update({f'{message.author.id}': []})
         raidban.involved[f'{message.author.id}'].append(message.id)
-        toban = raidban.increment()
+        if not new:
+            toban = raidban.increment()
         if punishment==2:
             response['unsafe'] = True
             response['description'] = f'RaidGuard configured to temporary ban'

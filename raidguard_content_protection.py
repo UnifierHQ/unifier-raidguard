@@ -82,7 +82,7 @@ class RaidBan:
         diff = self.duration - prevd
         self.expire += diff
         self.banned = self.duration > threshold
-        return self.duration > threshold or self.bantype == 1
+        return self.duration > threshold
 
 
 raidbans = []

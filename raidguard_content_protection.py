@@ -94,6 +94,7 @@ async def find_raidban(identifier):
     offset = 0
     for index in range(len(raidbans)):
         raidban = raidbans[index-offset]
+        print(raidban.expire - time.time(),raidban.identifier,identifier)
         if time.time() >= raidban.expire:
             raidbans.pop(index-offset)
             offset += 1
@@ -109,10 +110,8 @@ async def push_raidban(raidban):
             return index
     return None
 
-async def scan(message: discord.Message or revolt.Message or guilded.Message):
+async def scan(message: discord.Message or revolt.Message or guilded.Message, data):
     """Message scan logic"""
-
-    global raidbans
 
     # Example ban entry in target:
     # {'1187093090415149056': 0} (this is a permanent ban)
@@ -122,8 +121,11 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
         'description': 'No suspicious content found',
         'target': {},
         'delete': [],
-        'restrict': {}
+        'restrict': {},
+        'data': {}
     }
+
+    raidbans = data['raidbans']
 
     if (not message.guild.explicit_content_filter == discord.ContentFilter.all_members or
             message.channel.nsfw) and not config['allow_nsfw']:
@@ -281,7 +283,9 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
             if len(raidban.involved.keys()) >= 3:
                 response['restrict'].update({f'{message.server.id}':3600})
 
-        print(await push_raidban(raidban))
+        await push_raidban(raidban)
+
+    response['data'] = {'raidbans': raidbans}
 
     return response
 

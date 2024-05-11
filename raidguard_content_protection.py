@@ -83,6 +83,7 @@ class RaidBan:
         self.duration = self.duration * 2
         diff = self.duration - prevd
         self.expire += diff
+        print(threshold)
         self.banned = self.duration > threshold
         return self.duration > threshold
 
@@ -242,10 +243,10 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message):
     if punishment==0:
         pass
     else:
-        raidban = await find_raidban(f'{message.author.id}' if punishment==0 else message.content)
+        raidban = await find_raidban(f'{message.author.id}' if punishment==2 else message.content)
         if not raidban:
             raidban = RaidBan(
-                identifier=f'{message.author.id}' if punishment==0 else message.content,
+                identifier=f'{message.author.id}' if punishment==2 else message.content,
                 bantype=punishment-1,
                 constant=config['constant']
             )

@@ -83,18 +83,14 @@ class RaidBan:
         self.duration = self.duration * 2
         diff = self.duration - prevd
         self.expire += diff
-        print(threshold)
         self.banned = self.duration > threshold
         return self.duration > threshold
 
 
-raidbans = []
-
-async def find_raidban(identifier):
+async def find_raidban(identifier,raidbans):
     offset = 0
     for index in range(len(raidbans)):
         raidban = raidbans[index-offset]
-        print(raidban.expire - time.time(),raidban.identifier,identifier)
         if time.time() >= raidban.expire:
             raidbans.pop(index-offset)
             offset += 1
@@ -102,7 +98,7 @@ async def find_raidban(identifier):
             return raidban
     return None
 
-async def push_raidban(raidban):
+async def push_raidban(raidban,raidbans):
     for index in range(len(raidbans)):
         raidban_existing = raidbans[index]
         if raidban_existing.identifier == raidban.identifier:
@@ -248,7 +244,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
     if punishment==0:
         pass
     else:
-        raidban = await find_raidban(f'{message.author.id}' if punishment==2 else message.content)
+        raidban = await find_raidban(f'{message.author.id}' if punishment==2 else message.content,raidbans)
         new = False
         toban = False
         if not raidban:
@@ -286,7 +282,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
             if len(raidban.involved.keys()) >= 3:
                 response['restrict'].update({f'{message.server.id}':3600})
 
-        await push_raidban(raidban)
+        await push_raidban(raidban,raidbans)
 
     response['data'] = {'raidbans': raidbans}
 

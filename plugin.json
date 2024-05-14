@@ -12,7 +12,8 @@
     "tld",
     "jellyfish",
     "profanity-check",
-    "scikit-learn"
+    "scikit-learn",
+    "scipy"
   ],
   "shutdown": false,
   "modules": [],

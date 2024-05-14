@@ -11,7 +11,7 @@
   "requirements": [
     "tld",
     "jellyfish",
-    "better-profanity"
+    "profanity-check"
   ],
   "shutdown": false,
   "modules": [],

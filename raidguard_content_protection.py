@@ -82,7 +82,7 @@ class RaidBan:
         diff = self.duration - prevd
         self.expire += diff
         self.banned = self.duration > threshold
-        return self.duration > threshold
+        return self.duration > threshold, threshold
 
 
 async def find_raidban(identifier,raidbans):
@@ -245,6 +245,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
         raidban = await find_raidban(f'{message.author.id}' if punishment==2 else message.content,raidbans)
         new = False
         toban = False
+        threshold = config['constant']
         if not raidban:
             new = True
             raidban = RaidBan(
@@ -257,7 +258,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
             raidban.involved.update({f'{message.author.id}': []})
         raidban.involved[f'{message.author.id}'].append(message.id)
         if not new:
-            toban = raidban.increment()
+            toban, threshold = raidban.increment()
         if punishment==2:
             response['unsafe'] = True
             response['description'] = f'RaidGuard configured to temporary ban'
@@ -273,7 +274,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
                 todelete.append(raidban.involved[user])
 
             response['unsafe'] = True
-            response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{config["constant"]})'
+            response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{round(threshold,2)})'
             response['target'] = toban
             response['delete'] = todelete
 

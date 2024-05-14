@@ -8,6 +8,8 @@ Raid detection plugin for Unifier
 This is a plugin for Unifier which gives it the raid protection it really needs for larger communities. Don't let 
 those pesky raiders destroy your communities.
 
+Detects invites, phishing links, and common raid messages.
+
 ## Requirements
 Unifier v1.2.3 or newer is required.
 

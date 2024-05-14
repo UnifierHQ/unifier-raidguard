@@ -11,11 +11,7 @@
   "requirements": [
     "tld",
     "jellyfish",
-    "profanity-check",
-    "scikit-learn",
-    "scipy",
-    "threadpoolctl",
-    "joblib"
+    "better-profanity"
   ],
   "shutdown": false,
   "modules": [],

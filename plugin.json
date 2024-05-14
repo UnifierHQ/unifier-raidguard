@@ -13,7 +13,8 @@
     "jellyfish",
     "profanity-check",
     "scikit-learn",
-    "scipy"
+    "scipy",
+    "threadpoolctl"
   ],
   "shutdown": false,
   "modules": [],

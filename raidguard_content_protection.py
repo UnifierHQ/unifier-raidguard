@@ -274,7 +274,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
                 todelete.append(raidban.involved[user])
 
             response['unsafe'] = True
-            response['description'] = f'RaidGuard threshold passed ({raidban.duration}/{round(threshold,2)})'
+            response['description'] = f'RaidGuard dynamic threshold passed ({raidban.duration}/{round(threshold,2)})'
             response['target'] = toban
             response['delete'] = todelete
 

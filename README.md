@@ -15,6 +15,11 @@ Unifier v1.2.3 or newer is required.
 To install Unifier RaidGuard, you can run `u!install https://github.com/UnifierHQ/unifier-raidguard` on the bot.
 This will install the plugin through System Manager.
 
+## Troubleshooting
+### Conflicting file: `rapidphish.py`
+In v1.2.2 and older, some features of RaidGuard were integrated into Unifier Bridge, however we have removed this
+from v1.2.3 in favor of RaidGuard Plugin. Please delete `utils/rapidphish.py` and try again.
+
 ## License
 Unifier Revolt Support is licensed under the AGPLv3. If you wish to use its source code, please read the license 
 carefully before doing so.

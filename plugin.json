@@ -14,7 +14,8 @@
     "profanity-check",
     "scikit-learn",
     "scipy",
-    "threadpoolctl"
+    "threadpoolctl",
+    "joblib"
   ],
   "shutdown": false,
   "modules": [],

@@ -10,7 +10,8 @@
   ],
   "requirements": [
     "tld",
-    "jellyfish"
+    "jellyfish",
+    "better-profanity"
   ],
   "shutdown": false,
   "modules": [],

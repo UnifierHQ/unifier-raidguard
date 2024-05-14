@@ -24,6 +24,7 @@ import math
 import re
 from tld import get_tld
 from utils import rapidphish
+from better_profanity import profanity
 
 # 0: ignore
 # 1: watch
@@ -228,8 +229,8 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
         elif line.startswith('## '):
             multi *= 2
 
-    raid = (upper_percent > 0.5 and len(message.content) > 4 or len(urls) > 0 or
-            round(len(message.content) * multi) > 200)
+    raid = (upper_percent > 0.5 and len(message.content) > 10 or len(urls) > 0 or
+            round(len(message.content) * multi) > 200 or profanity.contains_profanity(message.content))
 
     punishment = 0
     if invite:

@@ -40,8 +40,6 @@ config = {
     ]
 }
 
-
-
 def findurl(string):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
     url = re.findall(regex,string)
@@ -206,7 +204,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
         url = url.lower()
         urls[key] = url
         if not url.startswith('http://') and not url.startswith('https://'):
-            urls[key] = f'http://{url}'
+            urls[key] = f'https://{url}'
         if '](' in url:
             urls[key] = url.replace('](', ' ', 1).split()[0]
         if ('discord.gg/' in url or 'discord.com/invite/' in url or 'discordapp.com/invite/' in url or
@@ -287,4 +285,3 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
     response['data'] = {'raidbans': raidbans}
 
     return response
-

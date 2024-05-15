@@ -216,7 +216,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
 
     if len(urls) > 0:
         rpresults = rapidphish.compare_urls(urls, 0.85)
-        phishing = rpresults.final_verdict == 'safe'
+        phishing = rpresults.final_verdict == 'unsafe'
 
     chars = ''.join(message.content.split())  # remove all whitespace
     upper_percent = sum(i.isupper() for i in chars) / len(chars)

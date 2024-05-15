@@ -134,6 +134,9 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
         )
         return response
 
+    if len(message.content)==0:
+        return response
+
     invite = False
     phishing = False
 

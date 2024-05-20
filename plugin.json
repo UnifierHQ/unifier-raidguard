@@ -3,7 +3,7 @@
   "name": "RaidGuard",
   "description": "Raid detection plugin for Unifier",
   "version": "v1.1.0",
-  "release": 0,
+  "release": 1,
   "minimum": 46,
   "services": [
     "content_protection"

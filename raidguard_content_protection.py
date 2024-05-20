@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-import discord
+import nextcord
 import revolt
 import guilded
 import time
@@ -105,7 +105,7 @@ async def push_raidban(raidban,raidbans):
             return index
     return None
 
-async def scan(message: discord.Message or revolt.Message or guilded.Message, data):
+async def scan(message: nextcord.Message or revolt.Message or guilded.Message, data):
     """Message scan logic"""
 
     # Example ban entry in target:
@@ -125,7 +125,7 @@ async def scan(message: discord.Message or revolt.Message or guilded.Message, da
     except:
         raidbans = []
 
-    if (not message.guild.explicit_content_filter == discord.ContentFilter.all_members or
+    if (not message.guild.explicit_content_filter == nextcord.ContentFilter.all_members or
             message.channel.nsfw) and not config['allow_nsfw']:
         response['unsafe'] = True
         response['description'] = (

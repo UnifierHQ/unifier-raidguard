@@ -26,19 +26,6 @@ from tld import get_tld
 from utils import rapidphish
 from better_profanity import profanity
 
-# 0: ignore
-# 1: watch
-# 2: temp
-
-config = {
-    'constant': 9600,
-    'allow_nsfw': False,
-    'invites': 2,
-    'rapidphish': 2,
-    'raid': 1,
-    'rapidphish_whitelist': []
-}
-
 def findurl(string):
     regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
     url = re.findall(regex,string)
@@ -105,6 +92,18 @@ async def push_raidban(raidban,raidbans):
 
 async def scan(message: nextcord.Message or revolt.Message or guilded.Message, data):
     """Message scan logic"""
+    
+    config = {
+        'constant': 9600,
+        'allow_nsfw': False,
+        'invites': 2,
+        'rapidphish': 2,
+        'raid': 1,
+        'rapidphish_whitelist': []
+    }
+
+    if 'config' in data.keys():
+        config.update(data['config'])
 
     # Example ban entry in target:
     # {'1187093090415149056': 0} (this is a permanent ban)

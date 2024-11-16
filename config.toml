@@ -1,6 +1,6 @@
 [filter]
 constant = 9600
-allow_nsfw = False,
+allow_nsfw = false
 invites = 2
 rapidphish = 2
 raid = 1

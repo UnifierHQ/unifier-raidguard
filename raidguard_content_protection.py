@@ -36,9 +36,7 @@ config = {
     'invites': 2,
     'rapidphish': 2,
     'raid': 1,
-    'rapidphish_whitelist': [
-
-    ]
+    'rapidphish_whitelist': []
 }
 
 def findurl(string):

@@ -1,1 +1,7 @@
-
+[filter]
+constant = 9600
+allow_nsfw = False,
+invites = 2
+rapidphish = 2
+raid = 1
+rapidphish_whitelist = []

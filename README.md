@@ -1,6 +1,9 @@
 # Unifier RaidGuard
 Raid detection plugin for Unifier
 
+> [!CAUTION]
+> RaidGuard has been discontinued in favor of [Filters](https://wiki.unifierhq.org/guides/bridge/filters).
+
 > [!NOTE]
 > This is a Unifier **plugin**! To access Unifier, go [here](https://github.com/greeeen-dev/unifier).
 
